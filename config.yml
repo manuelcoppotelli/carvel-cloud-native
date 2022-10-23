@@ -1,0 +1,8 @@
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+sources:
+- image: demo-app
+  path: src
+destinations:
+- image: demo-app
+  newImage: ghcr.io/manuelcoppotelli/demo/app

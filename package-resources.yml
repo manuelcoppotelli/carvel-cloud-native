@@ -1,0 +1,57 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: demo.thepipelineguys.live.0.0.0
+spec:
+  refName: demo.thepipelineguys.live
+  releasedAt: null
+  template:
+    spec:
+      deploy:
+      - kapp: {}
+      fetch:
+      - git: {}
+      template:
+      - ytt:
+          paths:
+          - manifests
+          - values.yml
+      - kbld:
+          paths:
+          - '-'
+          - config.yml
+  valuesSchema:
+    openAPIv3: null
+  version: 0.0.0
+
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  creationTimestamp: null
+  name: demo.thepipelineguys.live
+spec:
+  displayName: demo
+  longDescription: |
+    This is a demo package to show things
+  shortDescription: a demo package
+
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  annotations:
+    kctrl.carvel.dev/local-fetch-0: .
+  creationTimestamp: null
+  name: demo
+spec:
+  packageRef:
+    refName: demo.thepipelineguys.live
+    versionSelection:
+      constraints: 0.0.0
+  serviceAccountName: demo-sa
+status:
+  conditions: null
+  friendlyDescription: ""
+  observedGeneration: 0

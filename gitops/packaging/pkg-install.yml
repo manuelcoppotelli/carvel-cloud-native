@@ -1,0 +1,15 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  annotations:
+    kapp.k14s.io/change-group: "demo"
+    kapp.k14s.io/change-rule.create-order: "upsert after upserting packageinstall-setup"
+    kapp.k14s.io/change-rule.delete-order: "delete before deleting packageinstall-setup"
+  name: demo
+  namespace: pkg-gitops
+spec:
+  packageRef:
+    refName: demo.thepipelineguys.live
+    versionSelection:
+      constraints: 0.0.2
+  serviceAccountName: pkg-gitops-pkgi-sa

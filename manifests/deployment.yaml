@@ -1,0 +1,24 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/change-rule: "upsert after upserting thepipelineguys.live/rbac"
+  name: demo-deploy
+spec:
+  selector:
+    matchLabels:
+      app: demo-deploy
+  template:
+    metadata:
+      labels:
+        app: demo-deploy
+    spec:
+      serviceAccountName: demo-sa
+      containers:
+      - name: demo-deploy
+        image: demo-app
+        env:
+        - name: MSG
+          value: manifest #! data.values.msg
